@@ -13,9 +13,12 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
         }
         h1 {
             margin: 0;
+            text-align: center;
+            color: #333; /* Dark gray text color */
         }
         p {
             font-size: smaller;
@@ -30,17 +33,20 @@
             border: 1px solid #ccc;
             padding: 10px;
             overflow-y: scroll;
+            background-image: linear-gradient(to right, #ffffff, #f0f8ff); /* Gradient background */
         }
         #message-input {
             width: calc(100% - 22px);
             padding: 10px;
             margin-top: 10px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px; /* Rounded corners */
         }
     </style>
 </head>
 <body>
-    <h1>Demo Companion APP</h1>
-    <p>This is just a demo crafted in 10 mins. Can be updated based on real requirements</p>
+    <h1>Job Application</h1>
+    <p>If you still need a CV, just ask for it</p>
     <div id="chat-container"></div>
     <input type="text" id="message-input" placeholder="Type your message here...">
     <script>
@@ -62,9 +68,22 @@
                 .then(data => {
                     chatContainer.innerHTML += `<p><strong>Companion:</strong> ${data.response}</p>`;
                     chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                    // Read aloud the response
+                    speak(data.response);
                 });
             }
         });
+
+        // Function to read aloud using Web Speech API
+        function speak(text) {
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.pitch = 1;
+            utterance.rate = 1;
+            synth.speak(utterance);
+        }
     </script>
 </body>
 </html>
