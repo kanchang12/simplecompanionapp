@@ -93,44 +93,42 @@
     <input type="text" id="message-input" placeholder="Type your message here...">
     
 
-    <script>
-        document.getElementById('message-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                let message = e.target.value;
-                e.target.value = '';
-                let chatContainer = document.getElementById('chat-container');
-                chatContainer.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+<script>
+    document.getElementById('message-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            let message = e.target.value;
+            e.target.value = '';
+            let chatContainer = document.getElementById('chat-container');
+            chatContainer.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
 
-                fetch('/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `message=${encodeURIComponent(message)}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    chatContainer.innerHTML += `<p><strong>Companion:</strong> ${data.response}</p>`;
-                    chatContainer.scrollTop = chatContainer.scrollHeight;
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatContainer.innerHTML += `<p><strong>Companion:</strong> ${data.response}</p>`;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
 
-                    // Read aloud the response and show animation
-                    speak(data.response);
-                });
-            }
-        });
-
-        // Function to read aloud using Web Speech API and show animation
-        function speak(text) {
-            const synth = window.speechSynthesis;
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.pitch = 1;
-            utterance.rate = 1;
-            synth.speak(utterance);
-
-            
-            };
+                // Read aloud the response and show animation
+                speak(data.response);
+            });
         }
-    </script>
+    });
+
+    // Function to read aloud using Web Speech API and show animation
+    function speak(text) {
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.pitch = 1;
+        utterance.rate = 1;
+        synth.speak(utterance);
+    }
+</script>
+
 </body>
 </html>
