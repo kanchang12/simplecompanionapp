@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Companion APP</title>
+    <title>Job Application</title>
     <style>
         body {
             display: flex;
@@ -110,7 +110,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                chatContainer.innerHTML += `<p><strong>Companion:</strong> ${data.response}</p>`;
+                chatContainer.innerHTML += `<p><strong>Sam:</strong> ${data.response}</p>`;
                 chatContainer.scrollTop = chatContainer.scrollHeight;
 
                 // Read aloud the response and show animation
