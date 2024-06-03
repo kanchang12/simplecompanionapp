@@ -128,13 +128,7 @@
             utterance.rate = 1;
             synth.speak(utterance);
 
-            // Add talking animation
-            const animationContainer = document.getElementById('animation-container');
-            animationContainer.classList.add('talking');
             
-            utterance.onend = () => {
-                // Remove talking animation
-                animationContainer.classList.remove('talking');
             };
         }
     </script>
