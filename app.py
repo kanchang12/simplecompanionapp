@@ -56,6 +56,24 @@ def process():
     response.redirect('/process')
 
     return str(response)
+    
+@app.route('/make-call', methods=['GET', 'POST'])
+def make_call():
+    try:
+        to_number = request.form['to_number']
+        from_number = request.form['from_number']
+    except KeyError as e:
+        return jsonify({'error': f'Missing required parameter: {e}'}), 400
+
+    try:
+        call = client.calls.create(
+            url=request.url_root + 'voice',
+            to=to_number,
+            from_=from_number
+        )
+        return jsonify({'message': f'Call initiated from {from_number} to {to_number}'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
