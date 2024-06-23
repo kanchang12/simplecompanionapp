@@ -18,7 +18,7 @@ openai.api_key = OPENAI_API_KEY
 # Define system instructions
 SYSTEM_INSTRUCTIONS = "You are a helpful assistant. Talk about weather"
 
-@app.route('/voice', methods=['POST'])
+@app.route('/voice', methods=['GET', 'POST'])
 def voice():
     response = VoiceResponse()
     gather = Gather(input='speech', action='/process', method='POST')
