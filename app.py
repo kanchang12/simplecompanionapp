@@ -26,7 +26,7 @@ def voice():
     response.append(gather)
     return str(response)
 
-@app.route('/process', methods=['POST'])
+@app.route('/process', methods=['GET', 'POST'])
 def process():
     speech_result = request.form['SpeechResult']
     
