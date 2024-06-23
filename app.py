@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from twilio.twiml.voice_response import VoiceResponse, Gather
 from twilio.rest import Client
 import openai
